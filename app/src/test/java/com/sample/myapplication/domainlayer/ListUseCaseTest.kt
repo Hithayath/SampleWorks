@@ -8,7 +8,6 @@ import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -33,11 +32,11 @@ class ListUseCaseTest {
         coEvery { listRepository.getListsStream() } returns mockList
 
         val actual = ListUiState.Items(listOf(ListItem(
-            id = "id", name = "title", about = "description"
+            id = "id", name = "firstname lastname", about = "address"
         )))
 
         //When
-        val expected = listUseCase().first()
+        val expected = listUseCase.getList().first()
 
         //Then
         assertEquals(expected, actual)
@@ -52,7 +51,7 @@ class ListUseCaseTest {
         }
 
         //When
-        listUseCase().catch {cause ->
+        listUseCase.getList().catch {cause ->
             assertEquals(expected, cause)
         }.collect()
 
@@ -69,7 +68,7 @@ class ListUseCaseTest {
         val actual = ListUiState.NoData
 
         //When
-        val expected = listUseCase().first()
+        val expected = listUseCase.getList().first()
 
         //Then
         assertEquals(expected, actual)
@@ -78,8 +77,11 @@ class ListUseCaseTest {
     private fun getMockListData(): ListData {
         return mockk {
             every { id } returns "id"
-            every { title } returns "title"
-            every { description } returns "description"
+            every { firstName } returns "firstname"
+            every { lastName } returns "lastname"
+            every { dob } returns "dob"
+            every { address } returns "address"
+            every { contact } returns "contact"
         }
     }
 

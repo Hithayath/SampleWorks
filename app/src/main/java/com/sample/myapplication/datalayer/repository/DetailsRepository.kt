@@ -1,9 +1,12 @@
 package com.sample.myapplication.datalayer.repository
 
-import com.sample.myapplication.datalayer.DetailsData
+import com.sample.myapplication.datalayer.ListData
+import com.sample.myapplication.datalayer.local.LocalDataSource
 import com.sample.myapplication.datalayer.network.NetworkDataSource
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -11,41 +14,25 @@ interface DetailsRepository {
     /**
      * Gets the available list as a stream
      */
-    fun getDetailsStream(id: String): Flow<DetailsData?>
+    suspend fun getDetailsStream(id: String): Flow<ListData?>
 }
 
 
 class DetailsRepositoryImpl @Inject constructor(
-    private val networkDataSource: NetworkDataSource
+    private val networkDataSource: NetworkDataSource,
+    private val localDataSource: LocalDataSource,
+    private val ioDispatcher: CoroutineDispatcher
 ): DetailsRepository {
-    private val mockList = mutableListOf<DetailsData>()
 
-    init {
-        allDetailsData()
-    }
-
-
-    override fun getDetailsStream(id: String): Flow<DetailsData?> =
+    override suspend fun getDetailsStream(id: String): Flow<ListData?> = withContext(ioDispatcher) {
+        val allDetails = localDataSource.getListData()
         flow {
-            emit(getDetailsData(id))
+            emit(getDetailsData(allDetails, id))
         }
-
-    private fun getDetailsData(id: String): DetailsData? {
-        return mockList.find { it.id == id }
     }
 
-    private fun allDetailsData() {
-        repeat(10) {
-            mockList.add(
-                DetailsData(
-                    id = "$it",
-                    firstName = "First Name - $it",
-                    lastName = "Last Name - $it",
-                    dob = "Dob - $it",
-                    address = "Address - $it",
-                    contact = "Contact - $it",
-                )
-            )
-        }
+
+    private fun getDetailsData(allDetails: List<ListData>, id: String): ListData? {
+        return allDetails.find { it.id == id }
     }
 }

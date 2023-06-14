@@ -1,8 +1,8 @@
 package com.sample.myapplication.datalayer.di
 
 import com.sample.myapplication.datalayer.repository.DetailsRepository
-import com.sample.myapplication.datalayer.repository.FakeDetailsRepository
-import com.sample.myapplication.datalayer.repository.FakeListRepository
+//import com.sample.myapplication.datalayer.repository.FakeDetailsRepository
+//import com.sample.myapplication.datalayer.repository.FakeListRepository
 import com.sample.myapplication.datalayer.repository.ListRepository
 import dagger.Binds
 import dagger.Module
@@ -14,7 +14,7 @@ import dagger.hilt.testing.TestInstallIn
 @Module
 interface FakeRepositoryModule {
 
-    @Binds
+    /*@Binds
     fun bindsListRepository(
         listsRepository: FakeListRepository
     ): ListRepository
@@ -22,5 +22,5 @@ interface FakeRepositoryModule {
     @Binds
     fun bindDetailsRepository(
         detailsRepository: FakeDetailsRepository
-    ): DetailsRepository
+    ): DetailsRepository*/
 }

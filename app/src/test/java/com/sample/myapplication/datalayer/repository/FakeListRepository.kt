@@ -4,8 +4,9 @@ import com.sample.myapplication.datalayer.ListData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
+/*
 class FakeListRepository: ListRepository {
-    override fun getListsStream(): Flow<List<ListData>> {
+    override suspend fun getListsStream(): Flow<List<ListData>> {
         return flowOf(getListData())
     }
 
@@ -14,10 +15,13 @@ class FakeListRepository: ListRepository {
         repeat(10) {
             mockList.add(ListData(
                 id = "$it",
-                title = "title - $it",
-                description = "Description of data to show in the card at position - $it",
+                firstName = "first",
+                lastName = "last",
+                dob = "dob - $it",
+                address = "address - $it",
+                contact = "contact - $it"
             ))
         }
         return mockList
     }
-}
+}*/

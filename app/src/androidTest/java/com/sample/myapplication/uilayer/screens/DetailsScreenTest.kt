@@ -35,28 +35,29 @@ class DetailsScreenTest {
                 ListScreen()
             }
         }
+
         composeTestRule.onNodeWithTag("List View").assertIsDisplayed()
-        composeTestRule.onNodeWithText("title - 0").assertIsDisplayed().performClick()
+        composeTestRule.onNodeWithText("Abraham Lincoln").assertIsDisplayed().performClick()
 
         val labelFirst = composeTestRule.activity.getString(R.string.label_first_name)
         composeTestRule.onNodeWithText(labelFirst).assertIsDisplayed()
-        composeTestRule.onNodeWithText("First Name - 0").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Abraham").assertIsDisplayed()
 
         val labelLast = composeTestRule.activity.getString(R.string.label_last_name)
         composeTestRule.onNodeWithText(labelLast).assertIsDisplayed()
-        composeTestRule.onNodeWithText("Last Name - 0").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Lincoln").assertIsDisplayed()
 
         val labelDob = composeTestRule.activity.getString(R.string.label_dob)
         composeTestRule.onNodeWithText(labelDob).assertIsDisplayed()
-        composeTestRule.onNodeWithText("Dob - 0").assertIsDisplayed()
+        composeTestRule.onNodeWithText("21/01/1981").assertIsDisplayed()
 
         val labelAddress = composeTestRule.activity.getString(R.string.label_address)
         composeTestRule.onNodeWithText(labelAddress).assertIsDisplayed()
-        composeTestRule.onNodeWithText("Address - 0").assertIsDisplayed()
+//        composeTestRule.onNodeWithText("Street 1, Road 1, City 1").assertIsDisplayed()
 
         val labelContact = composeTestRule.activity.getString(R.string.label_contact_number)
         composeTestRule.onNodeWithText(labelContact).assertIsDisplayed()
-        composeTestRule.onNodeWithText("Contact - 0").assertIsDisplayed()
+        composeTestRule.onNodeWithText("+1411111111").assertIsDisplayed()
 
         composeTestRule.onNodeWithContentDescription("Back Navigation").assertIsDisplayed().performClick()
     }

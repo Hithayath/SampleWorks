@@ -1,10 +1,8 @@
 package com.sample.myapplication.domainlayer
 
-import com.sample.myapplication.datalayer.DetailsData
+import com.sample.myapplication.datalayer.ListData
 import com.sample.myapplication.datalayer.local.DetailItem
-import com.sample.myapplication.datalayer.local.ListItem
 import com.sample.myapplication.datalayer.repository.DetailsRepository
-import com.sample.myapplication.uilayer.ListUiState
 import com.sample.myapplication.uilayer.PopupState
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
@@ -38,7 +36,7 @@ class DetailsUseCaseTest {
         val actual = PopupState.Details(DetailItem("id", "firstname", "lastname", "dob", "address", "contact"))
 
         //When
-        val expected = detailsUseCase(id).first()
+        val expected = detailsUseCase.getDetails(id).first()
 
         //Then
         assertEquals(expected, actual)
@@ -54,7 +52,7 @@ class DetailsUseCaseTest {
         }
 
         //When
-        detailsUseCase(id).catch {cause ->
+        detailsUseCase.getDetails(id).catch {cause ->
             assertEquals(expected, cause)
         }.collect()
 
@@ -66,20 +64,20 @@ class DetailsUseCaseTest {
     fun `test invoke details null case`() = runBlocking {
         //Given
         val id = "id"
-        val mockData = listOf<DetailsData?>(null).asFlow()
+        val mockData = listOf<ListData?>(null).asFlow()
         coEvery { detailsRepository.getDetailsStream(id) } returns mockData
 
         val actual = PopupState.Error(Exception("Data is not available."))
 
         //When
-        val expected = detailsUseCase(id).first()
+        val expected = detailsUseCase.getDetails(id).first()
         expected as PopupState.Error
 
         //Then
         assertEquals(expected.exception.message, actual.exception.message)
     }
 
-    private fun getMockDetailsData(): DetailsData {
+    private fun getMockDetailsData(): ListData {
         return mockk {
             every { id } returns "id"
             every { firstName } returns "firstname"

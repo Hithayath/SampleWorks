@@ -52,9 +52,6 @@ object Libs {
             const val layout = "androidx.compose.foundation:foundation-layout"
             const val tooling = "androidx.compose.ui:ui-tooling"
             const val animation = "androidx.compose.animation:animation"
-            const val coil = "io.coil-kt:coil-compose:2.0.0-rc01"
-            const val materialIcons = "androidx.compose.material:material-icons-core:1.1.1"
-            const val materialIconsExt = "androidx.compose.material:material-icons-extended:1.1.1"
 
             const val uiTest = "androidx.compose.ui:ui-test:$version"
             const val uiTestJunit = "androidx.compose.ui:ui-test-junit4:$version"
@@ -65,11 +62,6 @@ object Libs {
         object Lifecycle {
             private const val version = "2.6.1"
             const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
-        }
-
-        object Navigation {
-            private const val version = "2.6.0-alpha09"
-            const val navigationCompose = "androidx.navigation:navigation-compose:$version"
         }
 
         object Test {

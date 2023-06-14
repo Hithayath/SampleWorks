@@ -8,7 +8,6 @@ import com.sample.myapplication.uilayer.ListUiState
 import com.sample.myapplication.uilayer.PopupState
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.unmockkAll
 import kotlinx.coroutines.*
@@ -39,7 +38,7 @@ class ListViewModelTest {
     fun `test fetchList to get list of data and no data result case`() = runTest {
         //Given
         val expected = ListUiState.NoData
-        coEvery { listUseCase() } returns flowOf(expected)
+        coEvery { listUseCase.getList() } returns flowOf(expected)
 
         //When
         viewModel.fetchList()
@@ -54,7 +53,7 @@ class ListViewModelTest {
     fun `test fetchList to get list of data and error result case`() = runTest {
         //Given
         val expected = ListUiState.Error(Exception("some error"))
-        coEvery { listUseCase() } returns flowOf(expected)
+        coEvery { listUseCase.getList() } returns flowOf(expected)
 
         //When
         viewModel.fetchList()
@@ -69,7 +68,7 @@ class ListViewModelTest {
     fun `test fetchList to get list of data success case`() = runTest {
         //Given
         val expected = ListUiState.Items(listOf())
-        coEvery { listUseCase() } returns flowOf(expected)
+        coEvery { listUseCase.getList() } returns flowOf(expected)
 
         //When
         viewModel.fetchList()
@@ -85,7 +84,7 @@ class ListViewModelTest {
         //Given
         val id = "id"
         val expected = PopupState.Error(Exception("No data"))
-        every { detailsUseCase(id) } returns flowOf(expected)
+        coEvery { detailsUseCase.getDetails(id) } returns flowOf(expected)
 
         //When
         viewModel.getDetails(id)
@@ -101,7 +100,7 @@ class ListViewModelTest {
         //Given
         val id = "id"
         val expected = PopupState.Error(Exception("some error"))
-        coEvery { detailsUseCase(id) } returns flowOf(expected)
+        coEvery { detailsUseCase.getDetails(id) } returns flowOf(expected)
 
         //When
         viewModel.getDetails(id)
@@ -118,7 +117,7 @@ class ListViewModelTest {
         val id = "id"
         val expected = PopupState.Details(DetailItem("id", "firstname", "lastname",
             "dob", "address", "contact"))
-        coEvery { detailsUseCase(id) } returns flowOf(expected)
+        coEvery { detailsUseCase.getDetails(id) } returns flowOf(expected)
 
         //When
         viewModel.getDetails(id)
@@ -127,6 +126,36 @@ class ListViewModelTest {
 
         //Then
         Assert.assertEquals(expected, popupState)
+    }
+
+    @Test
+    fun `test reset popup state`() {
+        //Given
+        val expected = PopupState.Initiate
+
+        //When
+        viewModel.resetPopupState()
+
+        val popupState = viewModel.popupState.value
+
+        //Then
+        Assert.assertEquals(expected, popupState)
+    }
+
+    @Test
+    fun `test reset all states`() {
+        //Given
+        val expectedUiState = ListUiState.Initiate
+        val expectedPopupState = PopupState.Initiate
+        //When
+        viewModel.resetStates()
+
+        val listUiState = viewModel.listUiState.value
+        val popupState = viewModel.popupState.value
+
+        //Then
+        Assert.assertEquals(expectedUiState, listUiState)
+        Assert.assertEquals(expectedPopupState, popupState)
     }
 
     @After

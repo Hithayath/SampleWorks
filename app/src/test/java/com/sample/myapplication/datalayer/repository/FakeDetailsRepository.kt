@@ -1,16 +1,17 @@
 package com.sample.myapplication.datalayer.repository
 
-import com.sample.myapplication.datalayer.DetailsData
+import com.sample.myapplication.datalayer.ListData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
+/*
 class FakeDetailsRepository: DetailsRepository {
-    override fun getDetailsStream(id: String): Flow<DetailsData?> {
+    override suspend fun getDetailsStream(id: String): Flow<ListData?> {
         return flowOf(allDetailsData())
     }
 
-    private fun allDetailsData(): DetailsData {
-        return DetailsData(
+    private fun allDetailsData(): ListData {
+        return ListData(
             id = "0",
             firstName = "First Name - 0",
             lastName = "Last Name - 0",
@@ -19,4 +20,4 @@ class FakeDetailsRepository: DetailsRepository {
             contact = "Contact - 0",
         )
     }
-}
+}*/

@@ -35,8 +35,8 @@ class ListScreenTest {
             }
         }
         composeTestRule.onNodeWithTag("List View").assertIsDisplayed()
-        composeTestRule.onNodeWithText("title - 0").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Description of data to show in the card at position - 0").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Abraham Lincoln").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Street 1, Road 1, City 1").assertIsDisplayed()
         composeTestRule.onNodeWithTag("Column Scroll").performTouchInput { swipeUp() }
     }
 }

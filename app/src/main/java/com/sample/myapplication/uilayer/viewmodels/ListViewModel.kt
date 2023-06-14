@@ -32,7 +32,7 @@ class ListViewModel @Inject constructor(
         _listUiState.value = ListUiState.Loading
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
-            listUseCase().collect {
+            listUseCase.getList().collect {
                 _listUiState.value = it
             }
         }
@@ -41,7 +41,7 @@ class ListViewModel @Inject constructor(
     fun getDetails(id: String) {
         _popupState.value = PopupState.Initiate
         viewModelScope.launch {
-            detailsUseCase(id).collect {
+            detailsUseCase.getDetails(id).collect {
                 _popupState.value = it
             }
         }

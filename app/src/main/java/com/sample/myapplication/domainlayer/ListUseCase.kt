@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ListUseCase @Inject constructor(
     private val repository: ListRepository
 ) {
-    operator fun invoke(): Flow<ListUiState> {
+    suspend fun getList(): Flow<ListUiState> {
         return repository.getListsStream().map {
             if(it.isEmpty()) {
                 ListUiState.NoData
@@ -31,6 +31,6 @@ class ListUseCase @Inject constructor(
     }
 
     private fun mapListItem(listData: ListData): ListItem {
-        return ListItem(listData.id, listData.title, listData.description)
+        return ListItem(listData.id, listData.firstName.plus(" ").plus(listData.lastName), listData.address)
     }
 }

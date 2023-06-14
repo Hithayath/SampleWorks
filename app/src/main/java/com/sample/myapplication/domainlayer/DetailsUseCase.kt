@@ -1,6 +1,6 @@
 package com.sample.myapplication.domainlayer
 
-import com.sample.myapplication.datalayer.DetailsData
+import com.sample.myapplication.datalayer.ListData
 import com.sample.myapplication.datalayer.local.DetailItem
 import com.sample.myapplication.datalayer.repository.DetailsRepository
 import com.sample.myapplication.uilayer.PopupState
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class DetailsUseCase @Inject constructor(
     private val repository: DetailsRepository
 ) {
-    operator fun invoke(id: String): Flow<PopupState> {
+    suspend fun getDetails(id: String): Flow<PopupState> {
         return repository.getDetailsStream(id).map {
             it?.let { data ->
                 PopupState.Details(item = mapDetailItem(data))
@@ -24,7 +24,7 @@ class DetailsUseCase @Inject constructor(
         }
     }
 
-    private fun mapDetailItem(detailsData: DetailsData): DetailItem {
+    private fun mapDetailItem(detailsData: ListData): DetailItem {
         return DetailItem(detailsData.id, detailsData.firstName, detailsData.lastName,
             detailsData.dob, detailsData.address, detailsData.contact)
     }

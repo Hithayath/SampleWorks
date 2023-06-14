@@ -1,21 +1,48 @@
 
-# SampleWorks
+Overview:
+=========
 
-## MoviesApp
-<!---![movie](https://user-images.githubusercontent.com/13219351/31261815-77c349be-aa0b-11e7-9a6d-d3e3b08b6255.gif)--->
-![movie](https://github.com/hithayath/SampleWorks/blob/Demo_Files/movie_kmm.gif)
+- Supported versions : 21[OS - 5.0  Lollipop] - 33[OS - 13 Tiramisu]
 
-## Glimpses:
-![Glimpses_demo](https://cloud.githubusercontent.com/assets/13219351/16361808/990b8650-3bac-11e6-8b5b-2967321ae235.gif)
+- Libraries :
+    1. Android Material Design 2 and 3.
+    2. Android Jetpack Compose.
+    3. Kotlin Coroutines.
+    4. Hilt - Dependency Injection.
+    5. Retrofit with okhttp3, gson - Network communication and data parsing.
+    8. Unit testing - JUnit, MockK.
 
-## NearByApp:
-![nearby](https://user-images.githubusercontent.com/13219351/30161570-2b83241e-93e2-11e7-8af2-64327e9737ef.gif)
+Architecture:
+============
+![Arch](https://github.com/hithayath/SampleWorks/assets/13219351/c1e03c73-92e8-48c7-945b-193bfeddb342)
 
-## Retail:
-![retail_new](https://user-images.githubusercontent.com/13219351/32406475-7064a304-c192-11e7-8c4d-36193dce5316.gif)
 
-## Contact List:
-![Contact demo](https://cloud.githubusercontent.com/assets/13219351/26820724/ea8df55e-4ab4-11e7-89db-c21228c1481f.gif)
+Usage:
+======
+1. Clone/Download from github link.
+2. Open from AndroidStudio as  "open an existing Android Studio project" at cloned/extracted drive location.
+3. Find below the project structure explanation for details.
 
-## Top Songs @ iTunes:
-![itunes](https://user-images.githubusercontent.com/13219351/29249171-d4edb650-803b-11e7-9acf-4df53dd2ad89.gif)
+Project Structure:
+==================
+
+Design pattern : MVVM
+
+Base package : com.sample.myapplication
+
+Depends on the functionaly, components are categorized as sub-packages as below:
+
+- datalayer : For data handling either from api or local or mock
+
+- domainlayer : Business layer to handle application business logics if any.
+
+- uilayer:
+    - components: Atomic design component applied on jetpack compose for reusability
+    - screens: Different screens of the app.
+    - theme: Theme applied on app with Light and Dark themes.
+
+Unit Test:
+==========
+- Unit test coverage applied on view models and use cases.
+- UI test coverage applied on List screen, Details Screen.
+	
