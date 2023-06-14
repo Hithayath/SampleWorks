@@ -18,7 +18,7 @@ interface DetailsRepository {
 class DetailsRepositoryImpl @Inject constructor(
     private val networkDataSource: NetworkDataSource
 ): DetailsRepository {
-    val mockList = mutableListOf<DetailsData>()
+    private val mockList = mutableListOf<DetailsData>()
 
     init {
         allDetailsData()

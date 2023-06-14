@@ -1,7 +1,5 @@
 package com.sample.myapplication.uilayer.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sample.myapplication.domainlayer.DetailsUseCase
@@ -10,7 +8,9 @@ import com.sample.myapplication.uilayer.ListUiState
 import com.sample.myapplication.uilayer.PopupState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,8 +23,8 @@ class ListViewModel @Inject constructor(
     private val _listUiState = MutableStateFlow<ListUiState>(ListUiState.Initiate)
     val listUiState: StateFlow<ListUiState> = _listUiState.asStateFlow()
 
-    private val _popupState = MutableLiveData<PopupState?>(PopupState.Initiate)
-    val popupState: LiveData<PopupState?> = _popupState
+    private val _popupState = MutableStateFlow<PopupState?>(PopupState.Initiate)
+    val popupState: StateFlow<PopupState?> = _popupState
 
     private var fetchJob: Job? = null
 
