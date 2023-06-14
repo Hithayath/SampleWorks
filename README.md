@@ -10,7 +10,7 @@ Overview:
     3. Kotlin Coroutines.
     4. Hilt - Dependency Injection.
     5. Retrofit with okhttp3, gson - Network communication and data parsing.
-    8. Unit testing - JUnit, MockK.
+    8. Unit testing - JUnit, MockK and Espresso.
 
 Architecture:
 ============
