@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyApplication</string>
+    <string name="ok">Ok</string>
+    <string name="no_data">List is empty</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="user_details">Details</string>
+    <string name="label_first_name">First Name</string>
+    <string name="label_last_name">Last Name</string>
+    <string name="label_dob">Date of birth</string>
+    <string name="label_address">Address</string>
+    <string name="label_contact_number">Contact Number</string>
+</resources>
